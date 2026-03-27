@@ -24,5 +24,5 @@ spec:
         provider: github
         url: "https://github.com/black-quartz/flux-fleet-management.git"
         ref: "refs/heads/main"
-        path: "kubernetes/production/flux-system"
+        path: "kubernetes/flux-system"
         pullSecret: "flux-system"
