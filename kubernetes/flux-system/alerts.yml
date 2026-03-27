@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   providerRef:
-    name: github-status
+    name: github-provider
   eventSeverity: info
   eventSources:
     - kind: Kustomization
