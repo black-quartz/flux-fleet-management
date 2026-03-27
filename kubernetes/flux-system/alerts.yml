@@ -5,7 +5,8 @@ metadata:
     namespace: flux-system
 spec:
     providerRef:
-        name: github-provider
+        - name: github-provider
+        - name: slack-provider
     eventSeverity: info
     eventSources:
         - kind: Kustomization
