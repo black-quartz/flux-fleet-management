@@ -3,5 +3,5 @@ kind: Kustomization
 resources:
     - flux-instance.yml
     - alerts.yml
-    - ../../shared/notification-providers/github.yml
-    - ../../shared/notification-providers/slack.yml
+    - notifications/
+    - registry/
