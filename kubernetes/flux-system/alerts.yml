@@ -5,8 +5,20 @@ metadata:
     namespace: flux-system
 spec:
     providerRef:
-        - name: github-provider
-        - name: slack-provider
+        name: github-provider
+    eventSeverity: info
+    eventSources:
+        - kind: Kustomization
+          name: "flux-system"
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+    name: slack-notification
+    namespace: flux-system
+spec:
+    providerRef:
+        name: slack-provider
     eventSeverity: info
     eventSources:
         - kind: Kustomization
