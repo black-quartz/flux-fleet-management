@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 1m
-  url: https://github.com/black-quartz/black-quartz-platform
+  url: https://github.com/black-quartz/black-quartz-platform.git
   ref:
     branch: main
   secretRef:
