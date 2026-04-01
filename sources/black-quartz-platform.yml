@@ -1,0 +1,26 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: black-quartz-platform
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/black-quartz/black-quartz-platform
+  ref:
+    branch: main
+  secretRef:
+    name: flux-system
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: black-quartz-platform
+  namespace: flux-system]
+spec:
+  interval: 10m
+  path: kubernetes/clusters/production
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: black-quartz-platform
+  wait: true
