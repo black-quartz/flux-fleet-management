@@ -18,6 +18,7 @@ metadata:
   name: black-quartz-platform
   namespace: flux-system
 spec:
+  serviceAccountName: flux-deploy
   interval: 10m
   path: kubernetes/clusters/production
   prune: true
