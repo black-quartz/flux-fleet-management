@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flux-deploy
+  namespace: flux-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flux-deploy-binding
+subjects:
+  - kind: ServiceAccount
+    name: flux-deploy
+    namespace: flux-system
+    apiGroup: ""
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin # sighhhhhhhhhhh (I'm switching to Terraform with ephemeral creds as soon as I have time)
+  apiGroup: rbac.authorization.k8s.io
