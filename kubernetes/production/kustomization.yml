@@ -3,13 +3,12 @@ kind: Kustomization
 resources:
   # Flux Identity
   - ../../identity/flux-deploy.yml
-  
+
   # Sources
-  - ../../sources/black-quartz-platform.yml
-  
+  - ../../repositories/cert-manager-deployment.yml
+  - ../../repositories/black-quartz-platform.yml
+
   # Notification Resources
   - ../../notifications/github.yml
   - ../../notifications/slack.yml
   - ../../notifications/alerts.yml
-  
-
