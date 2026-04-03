@@ -4,6 +4,7 @@ metadata:
   name: platform-namespaces
   namespace: flux-system
 spec:
+  serviceAccountName: platform-deploy
   sourceRef:
     kind: GitRepository
     name: black-quartz-platform
@@ -17,6 +18,7 @@ metadata:
   name: platform-identity
   namespace: flux-system
 spec:
+  serviceAccountName: platform-deploy
   sourceRef:
     kind: GitRepository
     name: black-quartz-platform
