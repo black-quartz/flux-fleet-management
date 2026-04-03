@@ -7,6 +7,8 @@ resources:
   - ../../notifications/github.yml
   - ../../notifications/slack.yml
   - ../../notifications/alerts.yml
+  # Helm Repositories
+  - ../../helm-repositories/jetstack.yml
   # Repositories
   - ../../repositories/black-quartz-platform.yml
   - ../../repositories/cert-manager-deployment.yml
