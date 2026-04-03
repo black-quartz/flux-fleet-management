@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   serviceAccountName: cert-manager-deploy
+  targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
     name: cert-manager-deployment
@@ -21,6 +22,7 @@ metadata:
   namespace: flux-system
 spec:
   serviceAccountName: cert-manager-deploy
+  targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
     name: cert-manager-deployment
