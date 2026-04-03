@@ -8,9 +8,8 @@ spec:
   targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
-    name: cert-manager-deployment
-    namespace: flux-system
-  path: kubernetes
+    name: black-quartz-platform
+  path: kubernetes/components/cert-manager
   interval: 10m
   prune: true
   dependsOn:
@@ -26,9 +25,8 @@ spec:
   targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
-    name: cert-manager-deployment
-    namespace: flux-system
-  path: kubernetes/config
+    name: black-quartz-platform
+  path: kubernetes/components/cert-manager/config
   interval: 10m
   prune: true
   dependsOn:
