@@ -9,6 +9,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cert-manager-deployment
+    namespace: flux-system
   path: kubernetes
   interval: 10m
   prune: true
@@ -26,6 +27,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: cert-manager-deployment
+    namespace: flux-system
   path: kubernetes/config
   interval: 10m
   prune: true
