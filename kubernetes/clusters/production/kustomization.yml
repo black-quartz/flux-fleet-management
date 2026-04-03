@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # Flux Identity
+  - ../../identity/platform-deploy.yml
+  # Notification Resources
+  - ../../notifications/github.yml
+  - ../../notifications/slack.yml
+  - ../../notifications/alerts.yml
+  # Repositories
+  - ../../repositories/black-quartz-platform.yml
+  - ../../repositories/cert-manager-deployment.yml
+  # Flux Kustomizations
+  - ../../kustomizations/black-quartz-platform.yml
+  - ../../kustomizations/cert-manager.yml
