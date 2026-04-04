@@ -21,7 +21,7 @@ metadata:
   name: cert-manager-config
   namespace: flux-system
 spec:
-  serviceAccountName: flux=cert-manager-reconciler
+  serviceAccountName: flux-cert-manager-reconciler
   targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
