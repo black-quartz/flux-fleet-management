@@ -15,3 +15,4 @@ resources:
   # Flux Kustomizations
   - ../../kustomizations/black-quartz-platform.yml
   - ../../kustomizations/cert-manager.yml
+  - ../../kustomizations/envoy-gateway.yml
