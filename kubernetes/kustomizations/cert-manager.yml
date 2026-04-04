@@ -4,7 +4,7 @@ metadata:
   name: cert-manager
   namespace: flux-system
 spec:
-  serviceAccountName: cert-manager-deploy
+  serviceAccountName: flux-cert-manager-reconciler
   targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository
@@ -21,7 +21,7 @@ metadata:
   name: cert-manager-config
   namespace: flux-system
 spec:
-  serviceAccountName: cert-manager-deploy
+  serviceAccountName: flux=cert-manager-reconciler
   targetNamespace: cert-manager
   sourceRef:
     kind: GitRepository

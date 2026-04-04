@@ -2,7 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Flux Identity
-  - ../../identity/service-accounts/flux-platform-deploy.yml
+  - ../../identity/service-accounts/flux-platform-reconciler.yml
+  - ../../identity/service-accounts/flux-cert-manager-reconciler.yml
   # Notification Resources
   - ../../notifications/github.yml
   - ../../notifications/slack.yml

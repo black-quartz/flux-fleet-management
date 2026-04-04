@@ -4,7 +4,7 @@ metadata:
   name: platform-namespaces
   namespace: flux-system
 spec:
-  serviceAccountName: flux-platform-deploy
+  serviceAccountName: flux-platform-reconciler
   sourceRef:
     kind: GitRepository
     name: black-quartz-platform
@@ -18,7 +18,7 @@ metadata:
   name: platform-identity
   namespace: flux-system
 spec:
-  serviceAccountName: flux-platform-deploy
+  serviceAccountName: flux-platform-reconciler
   sourceRef:
     kind: GitRepository
     name: black-quartz-platform
