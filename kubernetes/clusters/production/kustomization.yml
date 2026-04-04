@@ -3,13 +3,14 @@ kind: Kustomization
 resources:
   # Flux Identity
   - ../../identity/service-accounts/flux-platform-reconciler.yml
+  # Flux Kustomizations
+  - ../../kustomizations/black-quartz-platform.yml
+  - ../../kustomizations/cert-manager.yml
+  - ../../kustomizations/envoy-gateway.yml
   # Notification Resources
   - ../../notifications/github.yml
   - ../../notifications/slack.yml
   - ../../notifications/alerts.yml
   # Repositories
   - ../../repositories/black-quartz-platform.yml
-  # Flux Kustomizations
-  - ../../kustomizations/black-quartz-platform.yml
-  - ../../kustomizations/cert-manager.yml
-  - ../../kustomizations/envoy-gateway.yml
+
