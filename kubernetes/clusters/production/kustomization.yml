@@ -7,9 +7,6 @@ resources:
   - ../../notifications/github.yml
   - ../../notifications/slack.yml
   - ../../notifications/alerts.yml
-  # Helm Repositories
-  - ../../helm-repositories/envoyproxy.yml
-  - ../../helm-repositories/jetstack.yml
   # Repositories
   - ../../repositories/black-quartz-platform.yml
   # Flux Kustomizations
