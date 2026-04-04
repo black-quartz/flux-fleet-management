@@ -1,0 +1,32 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: slack-deployments-channel
+  namespace: flux-system
+spec:
+  type: slack
+  secretRef:
+    name: slack-url
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: slack-notification
+  namespace: flux-system
+spec:
+  providerRef:
+    name: slack-deployments-channel
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: flux-system
+    - kind: Kustomization
+      name: platform-namespaces
+    - kind: Kustomization
+      name: platform-identity
+    - kind: Kustomization
+      name: cert-manager
+    - kind: Kustomization
+      name: cert-manager-config
+    - kind: Kustomization
+      name: envoy-gateway

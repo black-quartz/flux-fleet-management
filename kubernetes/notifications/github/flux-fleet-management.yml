@@ -1,25 +1,23 @@
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
-kind: Alert
+kind: Provider
 metadata:
-  name: github-commit-status
+  name: flux-fleet-management
   namespace: flux-system
 spec:
-  providerRef:
-    name: github-provider
-  eventSeverity: info
-  eventSources:
-    - kind: Kustomization
-      name: "flux-system"
+  type: github
+  address: https://github.com/black-quartz/flux-fleet-management
+  secretRef:
+    name: flux-system
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1beta3
 kind: Alert
 metadata:
-  name: slack-notification
+  name: flux-fleet-management-commit-status
   namespace: flux-system
 spec:
   providerRef:
-    name: slack-provider
+    name: flux-fleet-management
   eventSeverity: info
   eventSources:
     - kind: Kustomization
-      name: "flux-system"
+      name: flux-system
