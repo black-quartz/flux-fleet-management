@@ -14,3 +14,20 @@ spec:
   prune: true
   dependsOn:
     - name: platform-identity
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: envoy-gateway-config
+  namespace: flux-system
+spec:
+  serviceAccountName: flux-platform-reconciler
+  targetNamespace: envoy-gateway-system
+  sourceRef:
+    kind: GitRepository
+    name: black-quartz-platform
+  path: kubernetes/components/envoy-gateway/config
+  interval: 10m
+  prune: true
+  dependsOn:
+    - name: envoy-gateway
