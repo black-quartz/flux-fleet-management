@@ -13,4 +13,5 @@ spec:
   interval: 10m
   prune: true
   dependsOn:
+    - name: platform-network-policies
     - name: platform-identity

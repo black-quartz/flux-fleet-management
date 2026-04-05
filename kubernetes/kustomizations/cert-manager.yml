@@ -13,6 +13,7 @@ spec:
   interval: 10m
   prune: true
   dependsOn:
+    - name: platform-network-policies
     - name: platform-identity
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
