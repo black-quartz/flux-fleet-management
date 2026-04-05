@@ -27,5 +27,3 @@ spec:
       name: cert-manager
     - kind: Kustomization
       name: envoy-gateway
-    - kind: Kustomization
-      name: external-dns
