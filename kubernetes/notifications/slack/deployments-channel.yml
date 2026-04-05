@@ -31,4 +31,6 @@ spec:
     - kind: Kustomization
       name: envoy-gateway
     - kind: Kustomization
+      name: external-dns
+    - kind: Kustomization
       name: vault-deployment

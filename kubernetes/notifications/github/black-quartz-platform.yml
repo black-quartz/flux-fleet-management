@@ -23,3 +23,9 @@ spec:
       name: platform-namespaces
     - kind: Kustomization
       name: platform-identity
+    - kind: Kustomization
+      name: cert-manager
+    - kind: Kustomization
+      name: envoy-gateway
+    - kind: Kustomization
+      name: external-dns
