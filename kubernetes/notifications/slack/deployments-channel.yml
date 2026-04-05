@@ -30,3 +30,5 @@ spec:
       name: cert-manager-config
     - kind: Kustomization
       name: envoy-gateway
+    - kind: Kustomization
+      name: vault-deployment

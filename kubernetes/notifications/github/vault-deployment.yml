@@ -1,0 +1,23 @@
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Provider
+metadata:
+  name: vault-deployment
+  namespace: flux-system
+spec:
+  type: github
+  address: https://github.com/black-quartz/vault-deployment
+  secretRef:
+    name: flux-system
+---
+apiVersion: notification.toolkit.fluxcd.io/v1beta3
+kind: Alert
+metadata:
+  name: vault-deployment-commit-status
+  namespace: flux-system
+spec:
+  providerRef:
+    name: vault-deployment
+  eventSeverity: info
+  eventSources:
+    - kind: Kustomization
+      name: vault-deployment

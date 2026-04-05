@@ -7,10 +7,12 @@ resources:
   - ../../kustomizations/black-quartz-platform.yml
   - ../../kustomizations/cert-manager.yml
   - ../../kustomizations/envoy-gateway.yml
+  - ../../kustomizations/vault-deployment.yml
   # Repositories
   - ../../repositories/black-quartz-platform.yml
+  - ../../repositories/vault-deployment.yml
   # Notification Resources
   - ../../notifications/github/black-quartz-platform.yml
   - ../../notifications/github/flux-fleet-management.yml
+  - ../../notifications/github/vault-deployment.yml
   - ../../notifications/slack/deployments-channel.yml
-
