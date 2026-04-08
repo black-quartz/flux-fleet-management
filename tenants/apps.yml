@@ -1,14 +1,7 @@
-- tenant: elastic
-  namespace: elastic-system
-  repository:
-    url:
-    ref:
-      branch: main
-    path:
-
-- tenant: twingate
-  namespace: twingate
-
 - tenant: vault
   namespace: vault
-
+  repository:
+    url: https://github.com/black-quartz/vault-deployment
+    ref:
+      branch: main
+    path: kubernetes
