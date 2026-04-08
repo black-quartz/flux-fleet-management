@@ -1,0 +1,10 @@
+instance:
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+  cluster:
+    networkPolicy: false
+    multitenant: true
+    tenantDefaultServiceAccount: flux

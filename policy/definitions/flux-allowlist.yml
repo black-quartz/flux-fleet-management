@@ -1,0 +1,4 @@
+sources:
+  - "https://github.com/controlplaneio-fluxcd/"
+  - "oci://ghcr.io/controlplaneio-fluxcd/"
+  - "oci://registry-1.docker.io/bitnamicharts/"

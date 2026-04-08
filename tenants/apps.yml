@@ -1,0 +1,14 @@
+- tenant: elastic
+  namespace: elastic-system
+  repository:
+    url:
+    ref:
+      branch: main
+    path:
+
+- tenant: twingate
+  namespace: twingate
+
+- tenant: vault
+  namespace: vault
+

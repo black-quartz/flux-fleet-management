@@ -1,0 +1,30 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  distribution:
+    version: "2.x"
+    registry: "ghcr.io/fluxcd"
+    artifact: "oci://ghcr.io/controlplaneio-fluxcd/flux-operator-manifests:latest"
+  components:
+    - source-controller
+    - kustomize-controller
+    - helm-controller
+    - notification-controller
+    - image-reflector-controller
+    - image-automation-controller
+  cluster:
+    type: kubernetes
+    size: medium
+    networkPolicy: false
+    multitenant: true
+    tenantDefaultServiceAccount: flux
+    domain: "prod-us-1.blackquartz.io"
+  sync:
+    kind: GitRepository
+    url: "https://github.com/black-quartz/flux-fleet-management.git"
+    ref: "refs/heads/main"
+    path: "clusters/prod-us"
+    pullSecret: "github-auth"
