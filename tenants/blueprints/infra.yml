@@ -89,7 +89,7 @@ spec:
         sourceRef:
           kind: GitRepository
           name: flux-infra-management
-        path: "./components/<< inputs.tenant >>/controllers/<< inputs.environment >>"
+        path: "./components/<< inputs.tenant >>/controllers/${ENVIRONMENT}"
         prune: true
         postBuild:
           substituteFrom:
@@ -113,7 +113,7 @@ spec:
         sourceRef:
           kind: GitRepository
           name: flux-infra-management
-        path: "./components/<< inputs.tenant >>/configs/<< inputs.environment >>"
+        path: "./components/<< inputs.tenant >>/configs/${ENVIRONMENT}"
         prune: true
         postBuild:
           substituteFrom:

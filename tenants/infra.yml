@@ -1,5 +1,5 @@
-# - tenant: cert-manager
-#   namespace: cert-manager
+- tenant: cert-manager
+  namespace: cert-manager
 
-# - tenant: envoy-gateway
-#   namespace: envoy-gateway-system
+- tenant: envoy-gateway
+  namespace: envoy-gateway-system
