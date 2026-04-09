@@ -6,3 +6,12 @@ resources:
   - flux-system/runtime-info.yml
   - policy.yml
   - tenants.yml
+configMapGenerator:
+  - name: infra-tenants
+    namespace: flux-system
+    files:
+      - ../../tenants/infra.yml
+  - name: app-tenants
+    namespace: flux-system
+    files:
+      - ../../tenants/apps.yml

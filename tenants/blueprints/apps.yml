@@ -1,18 +1,4 @@
 apiVersion: fluxcd.controlplane.io/v1
-kind: ResourceSetInputProvider
-metadata:
-  name: app-tenants
-  namespace: flux-system
-spec:
-  type: GitHubBranch
-  url: https://github.com/black-quartz/flux-fleet-management
-  path: ./tenants/apps.yml
-  filter:
-    branch: main
-  secretRef:
-    name: github-auth
----
-apiVersion: fluxcd.controlplane.io/v1
 kind: ResourceSet
 metadata:
   name: apps
@@ -28,10 +14,10 @@ spec:
       ready: true
       readyExpr: status.observedGeneration >= 0
 
-  inputsFrom:
-    - apiVersion: fluxcd.controlplane.io/v1
-      kind: ResourceSetInputProvider
-      name: app-tenants
+  inputs:
+    - configMap:
+        name: app-tenants
+        key: apps.yml
   resources:
     - apiVersion: v1
       kind: Namespace
