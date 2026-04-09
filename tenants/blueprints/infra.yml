@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - apiVersion: fluxcd.controlplane.io/v1
       kind: ResourceSet
-      name: policies
+      name: flux-source-policy
       namespace: flux-system
       ready: true
       readyExpr: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
