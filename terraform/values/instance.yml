@@ -8,3 +8,5 @@ instance:
     networkPolicy: false
     multitenant: true
     tenantDefaultServiceAccount: flux
+  sync:
+    provider: github

@@ -12,7 +12,7 @@ resource "kubernetes_namespace_v1" "flux_system" {
 # Create a Kubernetes secret with the GitHub App credentials
 resource "kubernetes_secret_v1" "git_auth" {
     metadata {
-      name      = "github_auth"
+      name      = "github-auth"
       namespace = "flux-system"
     }
 
@@ -35,11 +35,11 @@ resource "helm_release" "flux_operator" {
   chart      = "flux-operator"
   wait       = true
 
-  depends_on = [kubernetes_namespace_v1.this]
-
   values = [
     file("values/operator.yml")
   ]
+
+  depends_on = [kubernetes_namespace_v1.flux_system]
 }
 
 # Deploy the Flux Instance
@@ -89,7 +89,7 @@ resource "helm_release" "flux_instance" {
         },
         {
             name  = "instance.sync.pullSecret"
-            value = "github_auth"
+            value = "github-auth"
         },
         {
             name  = "healthcheck.enabled"

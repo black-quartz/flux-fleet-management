@@ -30,7 +30,7 @@ spec:
 
   inputsFrom:
     - apiVersion: fluxcd.controlplane.io/v1
-      kind: ResourceSet
+      kind: ResourceSetInputProvider
       name: app-tenants
   resources:
     - apiVersion: v1

@@ -24,6 +24,7 @@ spec:
     domain: "prod-us-1.blackquartz.io"
   sync:
     kind: GitRepository
+    provider: github
     url: "https://github.com/black-quartz/flux-fleet-management.git"
     ref: "refs/heads/main"
     path: "clusters/prod-us"
