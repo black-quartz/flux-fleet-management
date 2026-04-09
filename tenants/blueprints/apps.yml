@@ -20,13 +20,13 @@ metadata:
   annotations:
     fluxcd.controlplane.io/reconcileEvery: "5m"
 spec:
-  # dependsOn:
-  #   - apiVersion: kustomize.toolkit.fluxcd.io/v1
-  #     kind: Kustomization
-  #     name: infra-configs
-  #     namespace: cert-manager
-  #     ready: true
-  #     readyExpr: status.observedGeneration >= 0
+  dependsOn:
+    - apiVersion: fluxcd.controlplane.io/v1
+      kind: ResourceSet
+      name: infra-tenants
+      namespace: flux-system
+      ready: true
+      readyExpr: status.observedGeneration >= 0
 
   inputsFrom:
     - apiVersion: fluxcd.controlplane.io/v1
