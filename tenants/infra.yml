@@ -72,6 +72,7 @@ spec:
         namespace: << inputs.namespace >>
       spec:
         interval: 5m
+        provider: github
         url: "https://github.com/black-quartz/flux-infra-management.git"
         ref:
           branch: main

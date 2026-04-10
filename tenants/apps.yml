@@ -77,6 +77,7 @@ spec:
         namespace: << inputs.namespace >>
       spec:
         interval: 5m
+        provider: github
         url: << inputs.repository.url >>
         ref:
           branch: << inputs.repository.ref.branch >>
