@@ -12,16 +12,15 @@ spec:
       name: infra-tenants
       namespace: flux-system
       ready: true
-      readyExpr: status.observedGeneration >= 0
 
   inputs:
     - tenant: vault
       namespace: vault
       repository:
-        url: https://github.com/black-quartz/vault-deployment
+        url: https://github.com/black-quartz/vault-deployment.git
         ref:
           branch: main
-        path: kubernetes
+        path: ./kubernetes/deploy/${ENVIRONMENT}
 
   resources:
     - apiVersion: v1
