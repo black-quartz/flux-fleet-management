@@ -77,10 +77,11 @@ spec:
         namespace: << inputs.namespace >>
       spec:
         interval: 5m
-        serviceAccountName: flux
         url: << inputs.repository.url >>
         ref:
           branch: << inputs.repository.ref.branch >>
+        secretRef:
+          name: github-auth
 
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization

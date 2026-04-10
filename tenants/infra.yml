@@ -75,6 +75,8 @@ spec:
         url: "https://github.com/black-quartz/flux-infra-management.git"
         ref:
           branch: main
+        secretRef:
+          name: github-auth
 
     - apiVersion: kustomize.toolkit.fluxcd.io/v1
       kind: Kustomization
