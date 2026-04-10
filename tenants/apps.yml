@@ -89,7 +89,7 @@ spec:
         name: apps
         namespace: << inputs.tenant >>
       spec:
-        targetNamespace: << inputs.tenant >>
+        targetNamespace: << inputs.namespace >>
         serviceAccountName: flux
         interval: 30m
         retryInterval: 5m
