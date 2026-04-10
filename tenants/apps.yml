@@ -1,7 +1,105 @@
-- tenant: vault
-  namespace: vault
-  repository:
-    url: https://github.com/black-quartz/vault-deployment
-    ref:
-      branch: main
-    path: kubernetes
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps
+  namespace: flux-system
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "5m"
+spec:
+  dependsOn:
+    - apiVersion: fluxcd.controlplane.io/v1
+      kind: ResourceSet
+      name: infra-tenants
+      namespace: flux-system
+      ready: true
+      readyExpr: status.observedGeneration >= 0
+
+  inputs:
+    - tenant: vault
+      namespace: vault
+      repository:
+        url: https://github.com/black-quartz/vault-deployment
+        ref:
+          branch: main
+        path: kubernetes
+
+  resources:
+    - apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: << inputs.namespace >>
+        labels:
+          toolkit.fluxcd.io/role: "tenant"
+
+    - apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: flux-runtime-info
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/flux-runtime-info"
+        labels:
+          reconcile.fluxcd.io/watch: Enabled
+
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: github-auth
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
+      type: Opaque
+
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: flux
+        namespace: << inputs.namespace >>
+
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: flux
+        namespace: << inputs.namespace >>
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: admin
+      subjects:
+        - kind: ServiceAccount
+          name: flux
+          namespace: << inputs.namespace >>
+
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: << inputs.tenant >>
+        namespace: << inputs.namespace >>
+      spec:
+        interval: 5m
+        serviceAccountName: flux
+        url: << inputs.repository.url >>
+        ref:
+          branch: << inputs.repository.ref.branch >>
+
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: apps
+        namespace: << inputs.tenant >>
+      spec:
+        targetNamespace: << inputs.tenant >>
+        serviceAccountName: flux
+        interval: 30m
+        retryInterval: 5m
+        wait: true
+        timeout: 5m
+        sourceRef:
+          kind: GitRepository
+          name: << inputs.tenant >>
+        path: << inputs.repository.path >>
+        prune: true
+        postBuild:
+          substituteFrom:
+            - kind: ConfigMap
+              name: flux-runtime-info
