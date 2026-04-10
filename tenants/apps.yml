@@ -104,3 +104,27 @@ spec:
           substituteFrom:
             - kind: ConfigMap
               name: flux-runtime-info
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: github-provider
+        namespace: << inputs.namespace >>
+      spec:
+        type: github
+        address: << inputs.repository.url >>
+        secretRef:
+          name: github-auth
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: github-commit-status
+        namespace: << inputs.namespace >>
+      spec:
+        providerRef:
+          name: github-provider
+        eventSeverity: info
+        eventSources:
+          - kind: Kustomization
+            name: << inputs.tenant >>

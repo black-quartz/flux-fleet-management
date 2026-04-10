@@ -127,3 +127,63 @@ spec:
           substituteFrom:
             - kind: ConfigMap
               name: flux-runtime-info
+    
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: github-provider
+        namespace: << inputs.namespace >>
+      spec:
+        type: github
+        address: https://github.com/black-quartz/flux-infra-management
+        secretRef:
+          name: github-auth
+    
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: github-commit-status
+        namespace: << inputs.namespace >>
+      spec:
+        providerRef:
+          name: github-provider
+        eventSeverity: info
+        eventSources:
+          - kind: Kustomization
+            name: infra-controllers
+          - kind: Kustomization
+            name: infra-configs
+
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: slack-webhook-url
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/slack-webhook-url"
+      type: Opaque
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: slack-provider
+        namespace: << inputs.namespace >>
+      spec:
+        type: slack
+        secretRef:
+          name: slack-webhook-url
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: slack-notification
+        namespace: << inputs.namespace >>
+      spec:
+        providerRef:
+          name: slack-provider
+        eventSeverity: info
+        eventSources:
+          - kind: Kustomization
+            name: infra-controllers
+          - kind: Kustomization
+            name: infra-configs

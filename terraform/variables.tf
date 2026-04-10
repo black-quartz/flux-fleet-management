@@ -44,16 +44,25 @@ variable "github_app_id" {
     description = "GitHub App ID for GitHub auth."
     type        = string
     nullable    = false
+    sensitive   = true
 }
 
 variable "github_app_installation_id" {
     description = "GitHub App Installation ID for GitHub auth."
     type        = string
     nullable    = false
+    sensitive   = true
 }
 
 variable "github_app_pem" {
     description = "GitHub App PEM-encoded private key for GitHub auth."
     type        = string
     nullable    = false
+    sensitive   = true
+}
+
+variable "slack_webhook_url" {
+    description = "Slack Webhook URL to use for platform deployment notifications."
+    type        = string
+    default     = ""
 }
