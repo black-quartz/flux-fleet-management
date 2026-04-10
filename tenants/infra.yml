@@ -20,6 +20,9 @@ spec:
 
     - tenant: envoy-gateway
       namespace: envoy-gateway-system
+    
+    - tenant: external-secrets
+      namespace: external-secrets
 
   resources:
     - apiVersion: v1
