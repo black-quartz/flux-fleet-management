@@ -18,9 +18,12 @@ spec:
     - tenant: cert-manager
       namespace: cert-manager
 
+    - tenant: elastic-operator
+      namespace: elastic-system
+
     - tenant: envoy-gateway
       namespace: envoy-gateway-system
-    
+
     - tenant: external-secrets
       namespace: external-secrets
 
@@ -127,7 +130,7 @@ spec:
           substituteFrom:
             - kind: ConfigMap
               name: flux-runtime-info
-    
+
     - apiVersion: notification.toolkit.fluxcd.io/v1beta3
       kind: Provider
       metadata:
@@ -138,7 +141,7 @@ spec:
         address: https://github.com/black-quartz/flux-infra-management
         secretRef:
           name: github-auth
-    
+
     - apiVersion: notification.toolkit.fluxcd.io/v1beta3
       kind: Alert
       metadata:
