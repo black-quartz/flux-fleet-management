@@ -20,7 +20,7 @@ spec:
         url: https://github.com/black-quartz/vault-deployment.git
         ref:
           branch: main
-        path: ./kubernetes/deploy/${ENVIRONMENT}
+        path: ./kubernetes/${ENVIRONMENT}
 
   resources:
     - apiVersion: v1
