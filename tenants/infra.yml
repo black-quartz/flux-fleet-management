@@ -15,9 +15,12 @@ spec:
       readyExpr: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
 
   inputs:
+    - tenant: actions-runner-controller
+      namespace: arc-system
+
     - tenant: cert-manager
       namespace: cert-manager
-    
+
     - tenant: cloudnative-pg
       namespace: cnpg-system
 
