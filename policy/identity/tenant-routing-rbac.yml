@@ -7,5 +7,5 @@ metadata:
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
 rules:
   - apiGroups: ["gateway.networking.k8s.io"]
-    resources: ["httproutes", "referencegrants"]
+    resources: ["backendtlspolicies", "httproutes", "referencegrants"]
     verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
