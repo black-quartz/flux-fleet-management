@@ -17,6 +17,9 @@ spec:
   inputs:
     - tenant: cert-manager
       namespace: cert-manager
+    
+    - tenant: cloudnative-pg
+      namespace: cnpg-system
 
     - tenant: elastic-operator
       namespace: elastic-system
