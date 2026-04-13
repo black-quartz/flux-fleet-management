@@ -17,7 +17,8 @@ spec:
       data:
         sources: >-
           https://github.com/black-quartz/elastic-stack-deployment
-          https://github.com/black-quartz/vault-deployment.git
+          https://github.com/black-quartz/vault-deployment
+          https://github.com/black-quartz/vector-deployment
           https://github.com/controlplaneio-fluxcd/
           https://helm.releases.hashicorp.com/
           oci://ghcr.io/controlplaneio-fluxcd/
