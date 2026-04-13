@@ -21,6 +21,14 @@ spec:
         ref:
           branch: main
         path: ./kubernetes/${ENVIRONMENT}
+    
+    - tenant: vector
+      namespace: vector
+      repository:
+        url: https://github.com/black-quartz/vector-deployment
+        ref:
+          branch: main
+        path: ./kubernetes/${ENVIRONMENT}
 
     - tenant: elastic-stack
       namespace: elastic-stack
