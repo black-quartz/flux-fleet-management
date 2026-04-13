@@ -17,7 +17,7 @@ spec:
     - tenant: vault
       namespace: vault
       repository:
-        url: https://github.com/black-quartz/vault-deployment.git
+        url: https://github.com/black-quartz/vault-deployment
         ref:
           branch: main
         path: ./kubernetes/${ENVIRONMENT}
