@@ -21,6 +21,7 @@ spec:
           https://github.com/black-quartz/vector-deployment
           https://github.com/controlplaneio-fluxcd/
           https://helm.releases.hashicorp.com/
+          https://helm.vector.dev
           oci://ghcr.io/controlplaneio-fluxcd/
     - apiVersion: admissionregistration.k8s.io/v1
       kind: ValidatingAdmissionPolicy
