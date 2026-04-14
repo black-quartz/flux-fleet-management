@@ -4,3 +4,4 @@ resources:
   - blueprints/flux-source-policy.yml
   - identity/tenant-routing-rbac.yml
   - identity/vault-rbac.yml
+  - identity/vector-rbac.yml
