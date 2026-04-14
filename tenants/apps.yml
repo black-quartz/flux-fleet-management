@@ -49,6 +49,7 @@ spec:
         labels:
           toolkit.fluxcd.io/role: "tenant"
           pod-security.kubernetes.io/enforce: << inputs.podSecurityEnforce >>
+          pod-security.kubernetes.io/enforce-version: latest
 
     - apiVersion: v1
       kind: ConfigMap
