@@ -16,14 +16,16 @@ spec:
   inputs:
     - tenant: vault
       namespace: vault
+      podSecurityEnforce: baseline
       repository:
         url: https://github.com/black-quartz/vault-deployment
         ref:
           branch: main
         path: ./kubernetes/${ENVIRONMENT}
-    
+
     - tenant: vector
       namespace: vector
+      podSecurityEnforce: privileged
       repository:
         url: https://github.com/black-quartz/vector-deployment
         ref:
@@ -32,6 +34,7 @@ spec:
 
     - tenant: elastic-stack
       namespace: elastic-stack
+      podSecurityEnforce: baseline
       repository:
         url: https://github.com/black-quartz/elastic-stack-deployment
         ref:
@@ -45,6 +48,7 @@ spec:
         name: << inputs.namespace >>
         labels:
           toolkit.fluxcd.io/role: "tenant"
+          pod-security.kubernetes.io/enforce: << inputs.podSecurityEnforce >>
 
     - apiVersion: v1
       kind: ConfigMap
