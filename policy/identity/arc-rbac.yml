@@ -12,8 +12,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  namespace: arc-runners
   name: flux-runner-manager-binding
+  namespace: arc-runners
 subjects:
   - kind: ServiceAccount
     name: flux
