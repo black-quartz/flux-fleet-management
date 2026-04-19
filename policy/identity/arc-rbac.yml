@@ -1,0 +1,24 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: runner-set-manager
+  namespace: arc-runners
+rules:
+  - apiGroups: ["actions.github.com"]
+    resources: ["autoscalingrunnersets", "ephemeralrunnersets"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  namespace: arc-runners
+  name: flux-runner-manager-binding
+subjects:
+  - kind: ServiceAccount
+    name: flux
+    namespace: arc-runners
+roleRef:
+  kind: Role
+  name: runner-set-manager
+  apiGroup: rbac.authorization.k8s.io
