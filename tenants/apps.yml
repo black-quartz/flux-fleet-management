@@ -14,6 +14,15 @@ spec:
       ready: true
 
   inputs:
+    - tenant: arc-runners
+      namespace: arc-runners
+      podSecurityEnforce: baseline
+      repository:
+        url: https://github.com/black-quartz/actions-runner-scale-set-deployment
+        ref:
+          branch: main
+        path: ./kubernetes/${ENVIRONMENT}
+         
     - tenant: vault
       namespace: vault
       podSecurityEnforce: baseline
