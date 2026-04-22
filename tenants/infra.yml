@@ -33,6 +33,9 @@ spec:
     - tenant: external-secrets
       namespace: external-secrets
 
+    - tenant: reloader
+      namespace: reloader
+
   resources:
     - apiVersion: v1
       kind: Namespace
