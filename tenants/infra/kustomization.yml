@@ -4,6 +4,7 @@ resources:
   - infra-resourceset.yml
 configMapGenerator:
   - name: infra-tenants
+    namespace: flux-system
     files:
       - inputs.yml
 generatorOptions:

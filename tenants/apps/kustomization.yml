@@ -4,6 +4,7 @@ resources:
   - app-resourceset.yml
 configMapGenerator:
   - name: app-tenants
+    namespace: flux-system
     files:
       - inputs.yml
 generatorOptions:
