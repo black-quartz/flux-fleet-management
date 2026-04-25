@@ -1,0 +1,20 @@
+- name: actions-runner-controller
+  namespace: arc-system
+
+- name: cert-manager
+  namespace: cert-manager
+
+- name: cloudnative-pg
+  namespace: cnpg-system
+
+- name: elastic-operator
+  namespace: elastic-system
+
+- name: envoy-gateway
+  namespace: envoy-gateway-system
+
+- name: external-secrets
+  namespace: external-secrets
+
+- name: reloader
+  namespace: reloader

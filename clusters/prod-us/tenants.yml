@@ -7,7 +7,7 @@ spec:
   serviceAccountName: flux-operator
   interval: 12h
   retryInterval: 3m
-  path: ./tenants
+  path: tenants/
   prune: true
   sourceRef:
     kind: GitRepository

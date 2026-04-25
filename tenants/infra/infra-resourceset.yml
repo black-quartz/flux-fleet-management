@@ -1,7 +1,7 @@
 apiVersion: fluxcd.controlplane.io/v1
 kind: ResourceSet
 metadata:
-  name: infra-tenants
+  name: infra-tenant-resourceset
   namespace: flux-system
   annotations:
     fluxcd.controlplane.io/reconcileEvery: "5m"
@@ -15,26 +15,10 @@ spec:
       readyExpr: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
 
   inputs:
-    - tenant: actions-runner-controller
-      namespace: arc-system
-
-    - tenant: cert-manager
-      namespace: cert-manager
-
-    - tenant: cloudnative-pg
-      namespace: cnpg-system
-
-    - tenant: elastic-operator
-      namespace: elastic-system
-
-    - tenant: envoy-gateway
-      namespace: envoy-gateway-system
-
-    - tenant: external-secrets
-      namespace: external-secrets
-
-    - tenant: reloader
-      namespace: reloader
+    - name: tenants
+      configMapRef:
+        name: infra-tenants
+        key: inputs.yml
 
   resources:
     - apiVersion: v1
