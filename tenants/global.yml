@@ -1,7 +1,7 @@
 apiVersion: fluxcd.controlplane.io/v1
 kind: ResourceSet
 metadata:
-  name: app-tenant-resourceset
+  name: global-tenants
   namespace: flux-system
   annotations:
     fluxcd.controlplane.io/reconcileEvery: "5m"
@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - apiVersion: fluxcd.controlplane.io/v1
       kind: ResourceSet
-      name: infra-tenants
+      name: platform-tenants
       namespace: flux-system
       ready: true
 
