@@ -43,6 +43,10 @@ resource "kubernetes_secret_v1" "slack_url" {
 
     type = "Opaque"
 
+    lifecycle {
+      ignore_changes = [data]
+    }
+    
     depends_on = [kubernetes_namespace_v1.flux_system]
 }
 
