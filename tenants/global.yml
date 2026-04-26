@@ -14,7 +14,7 @@ spec:
       ready: true
 
   inputs:
-    - tenant: arc-runners
+    - name: arc-runners
       namespace: arc-runners
       podSecurityEnforce: baseline
       repository:
@@ -23,7 +23,7 @@ spec:
           branch: main
         path: ./kubernetes/${ENVIRONMENT}
 
-    - tenant: vector
+    - name: vector
       namespace: vector
       podSecurityEnforce: privileged
       repository:

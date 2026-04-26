@@ -14,7 +14,7 @@ spec:
       ready: true
 
   inputs:
-    - tenant: vault
+    - name: vault
       namespace: vault
       podSecurityEnforce: baseline
       repository:
@@ -23,7 +23,7 @@ spec:
           branch: main
         path: ./kubernetes/${ENVIRONMENT}
 
-    - tenant: elastic-stack
+    - name: elastic-stack
       namespace: elastic-stack
       podSecurityEnforce: baseline
       repository:
