@@ -21,11 +21,11 @@ spec:
     networkPolicy: false
     multitenant: true
     tenantDefaultServiceAccount: flux
-    domain: "prod-us-1.blackquartz.io"
+    domain: "prod-us-1.ilysium.io"
   sync:
     kind: GitRepository
     provider: github
     url: "https://github.com/black-quartz/flux-fleet-management.git"
     ref: "refs/heads/main"
-    path: "clusters/prod-us"
+    path: "clusters/prod-us-1"
     pullSecret: "github-auth"

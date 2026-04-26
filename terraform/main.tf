@@ -24,10 +24,6 @@ resource "kubernetes_secret_v1" "git_auth" {
 
     type = "Opaque"
 
-    lifecycle {
-      ignore_changes = [data]
-    }
-
     depends_on = [kubernetes_namespace_v1.flux_system]
 }
 
@@ -42,10 +38,6 @@ resource "kubernetes_secret_v1" "slack_url" {
     }
 
     type = "Opaque"
-
-    lifecycle {
-      ignore_changes = [data]
-    }
     
     depends_on = [kubernetes_namespace_v1.flux_system]
 }
@@ -120,10 +112,6 @@ resource "helm_release" "flux_instance" {
             type  = "auto"
         }
     ]
-
-    lifecycle {
-      ignore_changes = [set]
-    }
 
     depends_on = [helm_release.flux_operator]
 }
