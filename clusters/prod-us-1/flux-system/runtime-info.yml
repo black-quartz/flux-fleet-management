@@ -11,4 +11,6 @@ metadata:
 data:
   ENVIRONMENT: production
   CLUSTER_NAME: prod-us-1
-  CLUSTER_DOMAIN: prod-us-1.blackquartz.io
+  CLUSTER_DOMAIN: prod-us-1.ilysium.io
+  CLUSTER_TYPE: kubernetes
+  CLUSTER_ROLE: hub

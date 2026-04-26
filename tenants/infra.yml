@@ -1,0 +1,201 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: infra-tenant-resourceset
+  namespace: flux-system
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "5m"
+spec:
+  dependsOn:
+    - apiVersion: fluxcd.controlplane.io/v1
+      kind: ResourceSet
+      name: flux-source-policy
+      namespace: flux-system
+      ready: true
+      readyExpr: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
+
+  inputs:
+    - name: actions-runner-controller
+      namespace: arc-system
+
+    - name: cert-manager
+      namespace: cert-manager
+
+    - name: cloudnative-pg
+      namespace: cnpg-system
+
+    - name: elastic-operator
+      namespace: elastic-system
+
+    - name: envoy-gateway
+      namespace: envoy-gateway-system
+
+    - name: external-secrets
+      namespace: external-secrets
+
+    - name: reloader
+      namespace: reloader
+
+  resources:
+    - apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: << inputs.namespace >>
+
+    - apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: flux-runtime-info
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/flux-runtime-info"
+        labels:
+          reconcile.fluxcd.io/watch: Enabled
+
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: github-auth
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
+      type: Opaque
+
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: flux
+        namespace: << inputs.namespace >>
+
+    - apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: flux-infra-<< inputs.name >>
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: flux
+          namespace: << inputs.namespace >>
+
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: GitRepository
+      metadata:
+        name: flux-infra-management
+        namespace: << inputs.namespace >>
+      spec:
+        interval: 5m
+        provider: github
+        url: "https://github.com/black-quartz/flux-infra-management.git"
+        ref:
+          branch: main
+        secretRef:
+          name: github-auth
+
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: infra-controllers
+        namespace: << inputs.namespace >>
+      spec:
+        targetNamespace: << inputs.namespace >>
+        serviceAccountName: flux
+        interval: 30m
+        retryInterval: 5m
+        wait: true
+        timeout: 5m
+        sourceRef:
+          kind: GitRepository
+          name: flux-infra-management
+        path: "./components/<< inputs.name >>/controllers/${ENVIRONMENT}"
+        prune: true
+        postBuild:
+          substituteFrom:
+            - kind: ConfigMap
+              name: flux-runtime-info
+
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: Kustomization
+      metadata:
+        name: infra-configs
+        namespace: << inputs.namespace >>
+      spec:
+        dependsOn:
+          - name: infra-controllers
+        targetNamespace: << inputs.namespace >>
+        serviceAccountName: flux
+        interval: 30m
+        retryInterval: 5m
+        wait: true
+        timeout: 5m
+        sourceRef:
+          kind: GitRepository
+          name: flux-infra-management
+        path: "./components/<< inputs.name >>/configs/${ENVIRONMENT}"
+        prune: true
+        postBuild:
+          substituteFrom:
+            - kind: ConfigMap
+              name: flux-runtime-info
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: github-provider
+        namespace: << inputs.namespace >>
+      spec:
+        type: github
+        address: https://github.com/black-quartz/flux-infra-management
+        secretRef:
+          name: github-auth
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: github-commit-status
+        namespace: << inputs.namespace >>
+      spec:
+        providerRef:
+          name: github-provider
+        eventSeverity: info
+        eventSources:
+          - kind: Kustomization
+            name: infra-controllers
+          - kind: Kustomization
+            name: infra-configs
+
+    - apiVersion: v1
+      kind: Secret
+      metadata:
+        name: slack-webhook-url
+        namespace: << inputs.namespace >>
+        annotations:
+          fluxcd.controlplane.io/copyFrom: "flux-system/slack-webhook-url"
+      type: Opaque
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Provider
+      metadata:
+        name: slack-provider
+        namespace: << inputs.namespace >>
+      spec:
+        type: slack
+        secretRef:
+          name: slack-webhook-url
+
+    - apiVersion: notification.toolkit.fluxcd.io/v1beta3
+      kind: Alert
+      metadata:
+        name: slack-notification
+        namespace: << inputs.namespace >>
+      spec:
+        providerRef:
+          name: slack-provider
+        eventSeverity: info
+        eventSources:
+          - kind: Kustomization
+            name: infra-controllers
+          - kind: Kustomization
+            name: infra-configs
