@@ -8,11 +8,9 @@ metadata:
 spec:
   dependsOn:
     - apiVersion: fluxcd.controlplane.io/v1
-      kind: ResourceSet
-      name: flux-source-policy
+      kind: ValidatingAdmissionPolicyBinding
+      name: flux-tenant-policy
       namespace: flux-system
-      ready: true
-      readyExpr: status.conditions.filter(e, e.type == 'Ready').all(e, e.status == 'True')
 
   inputs:
     - name: actions-runner-controller
