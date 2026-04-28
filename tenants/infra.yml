@@ -9,7 +9,7 @@ spec:
   dependsOn:
     - apiVersion: admissionregistration.k8s.io/v1
       kind: ValidatingAdmissionPolicyBinding
-      name: flux-tenant-policy
+      name: flux-tenant-sources
       namespace: flux-system
 
   inputs:
