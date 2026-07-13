@@ -6,7 +6,7 @@ metadata:
 spec:
   dependsOn:
     - name: apps
-  path: ./clusters/prod-us-1/tenants
+  path: ./clusters/prod-us-1/agents
   interval: 5m
   prune: true
   sourceRef:
