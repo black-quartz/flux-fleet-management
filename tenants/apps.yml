@@ -1,0 +1,237 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: ResourceSet
+metadata:
+  name: apps
+  namespace: flux-system
+  annotations:
+    fluxcd.controlplane.io/reconcileEvery: "5m"
+spec:
+  dependsOn:
+    - apiVersion: kustomize.toolkit.fluxcd.io/v1
+      kind: ResourceSet
+      name: infra
+      namespace: flux-system
+      ready: true
+
+  inputs:
+    - name: "arc-runners"
+      quota:
+        compute: "bronze"
+        storage: "bronze"
+      repository:
+        url: "https://github.com/ilysiumdotdev/actions-runner-scale-set-deployment"
+        path: "./kubernetes/${ENVIRONMENT}"
+      features:
+
+    - name: "elastic-stack"
+      quota:
+        compute: "gold"
+        storage: "gold"
+      repository:
+        url: "https://github.com/ilysiumdotdev/elastic-stack-deployment"
+        path: "./kubernetes/${ENVIRONMENT}"
+      features:
+
+    - name: "vault"
+      quota:
+        compute: "silver"
+        storage: "bronze"
+      repository:
+        url: "https://github.com/ilysiumdotdev/vault-deployment"
+        path: "./kubernetes/${ENVIRONMENT}"
+      features:
+
+    - name: "vector"
+      quota:
+        compute: "bronze"
+        storage: "bronze"
+      repository:
+        url: "https://github.com/ilysiumdotdev/vector-deployment"
+        path: "./kubernetes/${ENVIRONMENT}"
+      features:
+
+  resourcesTemplate: |
+    ---
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: << inputs.name >>
+      labels:
+        toolkit.fluxcd.io/role: "tenant"
+    ---
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: flux-runtime=info
+      namespace: << inputs.name >>
+      annotations:
+        fluxcd.controlplane.io/copyFrom: "flux-system/flux-runtime-info"
+      labels:
+        reconcile.fluxcd.io/watch: Enabled
+    ---
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: github-auth
+      namespace: << inputs.name >>
+    annotations:
+      fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
+    type: Opaque
+    ---
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: flux
+      namespace: << inputs.name >>
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: flux
+      namespace: << inputs.name >>
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: admin
+    subjects:
+      - kind: ServiceAccount
+        name: flux
+        namespace: << inputs.name >>
+    ---
+    apiVersion: source.toolkit.fluxcd.io/v1
+    kind: GitRepository
+    metadata:
+      name: << inputs.name >>
+      namespace: << inputs.name >>
+    spec:
+      interval: 5m
+      provider: github
+      url: << inputs.repository.url >>
+      ref:
+        branch: main
+      secretRef:
+        name: github-auth
+    ---
+    apiVersion: kustomize.toolkit.fluxcd.io/v1
+    kind: Kustomization
+    metadata:
+      name: << inputs.name >>
+      namespace: << inputs.name >>
+    spec:
+      targetNamespace: << inputs.name >>
+      serviceAccountName: flux
+      interval: 15m
+      retryInterval: 5m
+      wait: true
+      timeout: 5m
+      sourceRef:
+        kind: GitRepository
+        name: << inputs.name >>
+      path: << inputs.repository.path >>
+      prune: true
+      postBuild:
+        substituteFrom:
+          - kind: ConfigMap
+            name: flux-runtime-info
+    ---
+    apiVersion: notification.toolkit.fluxcd.io/v1beta3
+    kind: Provider
+    metadata:
+      name: github-alert-provider
+      namespace: << inputs.name >>
+    spec:
+      type: github
+      address: << inputs.repository.url >>
+      secretRef:
+        name: github-auth
+    ---
+    apiVersion: notification.toolkit.fluxcd.io/v1beta3
+    kind: Alert
+    metadata:
+      name: github-commit-status
+      namespace: << inputs.name >>
+    spec:
+      providerRef:
+        name: github-provider
+      eventSeverity: info
+      eventSources:
+        - kind: Kustomization
+          name: << inputs.name >>
+    ---
+    apiVersion: v1
+    kind: ResourceQuota
+    metadata:
+      name: tenant-quota
+      namespace: << inputs.name >>
+    spec:
+      hard:
+        <<- if eq inputs.quota.compute "gold" >>
+        requests.cpu: "2"
+        requests.memory: "8Gi"
+        limits.cpu: "4"
+        limits.memory: "16Gi"
+        pods: "16"
+        <<- else if eq inputs.quota.compute "silver" >>
+        requests.cpu: "1"
+        requests.memory: "4Gi"
+        limits.cpu: "2"
+        limits.memory: "8Gi"
+        pods: "12"
+        <<- else >>
+        requests.cpu: "500m"
+        requests.memory: "2Gi"
+        limits.cpu: "1"
+        limits.memory: "4Gi"
+        pods: "8"
+        <<- end >>
+    ---
+    apiVersion: v1
+    kind: LimitRange
+    metadata:
+      name: tenant-limits
+      namespace: << inputs.name >>
+    spec:
+      limits:
+        <<- if eq inputs.quota.compute "gold" >>
+        - type: Container
+          default:
+            cpu: "1"
+            memory: "2Gi"
+          defaultRequest:
+            cpu: "500m"
+            memory: "1Gi"
+          max:
+            cpu: "2"
+            memory: "8Gi"
+          min:
+            cpu: "10m"
+            memory: "32Mi"
+        <<- else if eq inputs.quota.compute "silver"
+        - type: Container
+          default:
+            cpu: "500m"
+            memory: "1Gi"
+          defaultRequest:
+            cpu: "200m"
+            memory: "512Mi"
+          max:
+            cpu: "1"
+            memory: "2Gi"
+          min:
+            cpu: "10m"
+            memory: "32Mi"
+        <<- else >>
+        - type: Container
+          default:
+            cpu: "200m"
+            memory: "512Mi"
+          defaltRequest:
+            cpu: "100m"
+            memory: "256Mi"
+          max:
+            cpu: "500m"
+            memory: "1Gi"
+          min:
+            cpu: "10m"
+            memory: "32Mi"
+        <<- end >>

@@ -4,7 +4,5 @@ resources:
   - flux-system/flux-instance.yml
   - flux-system/flux-operator.yml
   - flux-system/runtime-info.yml
-  - components.yml
-  - policy.yml
-  - rbac.yml
+  - state.yml
   - tenants.yml
