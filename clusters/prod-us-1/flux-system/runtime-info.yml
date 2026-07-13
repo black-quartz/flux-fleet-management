@@ -9,8 +9,8 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/ssa: "Merge"
 data:
-  ENVIRONMENT: production
-  CLUSTER_NAME: prod-us-1
+  CLUSTER_ARCHETYPE: platform
   CLUSTER_DOMAIN: prod-us-1.ilysium.io
+  CLUSTER_NAME: prod-us-1
   CLUSTER_TYPE: kubernetes
-  CLUSTER_ROLE: hub
+  ENVIRONMENT: production

@@ -1,0 +1,8 @@
+name: vector
+class: agent
+repository:
+  url: https://github.com/ilysiumdotdev/vector-deployment
+  path: ./kubernetes/${ENVIRONMENT}
+components:
+  - quota-compute-bronze
+  - quota-storage-bronze

@@ -1,0 +1,8 @@
+name: arc-runners
+class: agent
+repository:
+  url: https://github.com/ilysiumdotdev/actions-runner-scale-set-deployment
+  path: ./kubernetes/${ENVIRONMENT}
+components:
+  - quota-compute-bronze
+  - quota-storage-bronze

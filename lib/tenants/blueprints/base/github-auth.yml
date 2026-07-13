@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: github-auth
+  namespace: << inputs.namespace >>
+  annotations:
+    fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
+type: Opaque

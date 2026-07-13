@@ -1,0 +1,10 @@
+name: elastic-stack
+class: app
+repository:
+  url: https://github.com/ilysiumdotdev/elastic-stack-deployment
+  ref:
+    branch: main
+  path: ./kubernetes/${ENVIRONMENT}
+components:
+  - quota-compute-gold
+  - quota-storage-gold

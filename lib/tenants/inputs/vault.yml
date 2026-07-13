@@ -1,0 +1,8 @@
+name: vault
+class: app
+repository:
+  url: https://github.com/ilysiumdotdev/vault-deployment
+  path: ./kubernetes/${ENVIRONMENT}
+components:
+  - quota-compute-silver
+  - quota-storage-bronze

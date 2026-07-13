@@ -25,7 +25,7 @@ spec:
   sync:
     kind: GitRepository
     provider: github
-    url: "https://github.com/black-quartz/flux-fleet-management.git"
+    url: "https://github.com/ilysiumdotdev/flux-fleet-management"
     ref: "refs/heads/main"
     path: "clusters/prod-us-1"
     pullSecret: "github-auth"

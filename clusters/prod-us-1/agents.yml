@@ -1,10 +1,12 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: policy
+  name: agents
   namespace: flux-system
 spec:
-  path: ./clusters/prod-us-1/policy
+  dependsOn:
+    - name: apps
+  path: ./clusters/prod-us-1/tenants
   interval: 5m
   prune: true
   sourceRef:

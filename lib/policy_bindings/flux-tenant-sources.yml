@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flux-allowlist
+  namespace: flux-system
+  labels:
+    fluxcd.controlplane.io/role: "policy"
+data:
+  sources: >-
+    https://github.com/black-quartz/actions-runner-scale-set-deployment
+    https://github.com/black-quartz/elastic-stack-deployment
+    https://github.com/black-quartz/vault-deployment
+    https://github.com/black-quartz/vector-deployment
+    https://github.com/controlplaneio-fluxcd/
+    https://helm.releases.hashicorp.com/
+    https://helm.vector.dev
+    oci://ghcr.io/actions/actions-runner-controller-charts
+    oci://ghcr.io/controlplaneio-fluxcd/
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingAdmissionPolicyBinding
+metadata:
+  name: flux-tenant-sources
+spec:
+  policyName: "source.policy.fluxcd.controlplane.io"
+  validationActions: ["Deny"]
+  paramRef:
+    name: flux-allowlist
+    namespace: flux-system
+    parameterNotFoundAction: "Deny"
+  matchResources:
+    namespaceSelector:
+      matchExpressions:
+        - key: toolkit.fluxcd.io/role
+          operator: In
+          values:
+            - tenant
