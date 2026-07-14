@@ -17,7 +17,7 @@ Central GitOps repository for multi-cluster Kubernetes fleet orchestration, tena
 ## Overview
 
 > [!NOTE]
-> This repository follows the [ControlPlane Enterprise for Flux CD]("https://fluxcd.control-plane.io/") reference architecture.
+> This repository follows the [ControlPlane Enterprise for FluxCD]("https://fluxcd.control-plane.io/") reference architecture.
 > The `d2` reference architecture comprised of [d2-fleet](https://github.com/controlplaneio-fluxcd/d2-fleet), [d2-infra](https://github.com/controlplaneio-fluxcd/d2-infra) and [d2-apps](https://github.com/controlplaneio-fluxcd/d2-apps) is a set of best practices and production-ready examples for using Flux Operator and OCI Artifacts to manage the continuous delivery of Kubernetes infrastructure and applications on multi-cluster multi-tenant environments.
 
 This repository serves as the definitive GitOps declaration engine for an entire Kubernetes infrastructure fleet. By decoupling cluster-specific state from core infrastructure blueprints, the platform utilizes the Flux Operator to target distinct clusters (e.g., `prod-us-1`, `staging-1`) while applying conditional overrides. This design allows the platform to scale horizontally across regions and clouds with zero configuration drift.
@@ -54,7 +54,7 @@ flux-fleet-management/
 
 ### Contextual Configuration (Flux Runtime Info)
 
-Each cluster manages is identity locally via a `runtime-info.yml` ConfigMap. Upstream definitions ingest this ConfigMap to tmeplate values dynamically via post-rendering, removing the need to hardcode specific subdomains or environment boundaries into base application charts.
+Each cluster manages is identity locally via a `runtime-info.yml` ConfigMap. Upstream definitions ingest this ConfigMap to template values dynamically via post-rendering, removing the need to hardcode specific subdomains or environment boundaries into base application charts.
 
 | Key              | Description                                                                     |
 | ---------------- | ------------------------------------------------------------------------------- |
@@ -65,7 +65,7 @@ Each cluster manages is identity locally via a `runtime-info.yml` ConfigMap. Ups
 
 ## Multi-Tenant Provisioning
 
-Namespaces and RBAC boundaries are programmatically vended to consumers using **Flux ResourceSets.** Because all tenants share a base namespace template, new components & features can be added to the template and propagated to every single live tenant namespace with just one PR & reconcile run. Namespace features can also be dynamically provisioned using conditional logic.
+Namespaces and RBAC boundaries are programmatically vended to consumers using **Flux ResourceSets.** Because all tenants share a base namespace template, new components & features can be added to the template and propagated to every single live tenant namespace with just one PR & reconcile run. Namespace features can also be dynamically provisioned using conditional logic:
 
 ```yaml
 apiVersion: fluxcd.controlplane.io/v1
