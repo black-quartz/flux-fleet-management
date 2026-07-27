@@ -4,5 +4,7 @@ resources:
   - flux-system/flux-instance.yml
   - flux-system/flux-operator.yml
   - flux-system/runtime-info.yml
+  - extras/longhorn.yml
+  - extra/cilium-bgp.yml
   - state.yml
   - tenants.yml

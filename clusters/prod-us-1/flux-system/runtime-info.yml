@@ -9,7 +9,7 @@ metadata:
   annotations:
     kustomize.toolkit.fluxcd.io/ssa: "Merge"
 data:
-  CLUSTER_DOMAIN: prod-us-1.ilysium.io
+  CLUSTER_DOMAIN: prod-us-1.cluster.ilysium.io
   CLUSTER_NAME: prod-us-1
   CLUSTER_TYPE: kubernetes
   ENVIRONMENT: production

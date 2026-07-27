@@ -21,7 +21,7 @@ spec:
     networkPolicy: false
     multitenant: true
     tenantDefaultServiceAccount: flux
-    domain: "prod-us-1.ilysium.io"
+    domain: "prod-us-1.cluster.ilysium.io"
   sync:
     kind: GitRepository
     provider: github
