@@ -6,5 +6,5 @@ resources:
   - flux-system/runtime-info.yml
   - extras/longhorn.yml
   - extras/cilium-bgp.yml
-  - state.yml
+  - policies.yml
   - tenants.yml
