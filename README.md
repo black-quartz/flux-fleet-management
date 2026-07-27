@@ -117,7 +117,7 @@ spec:
       - kind: ServiceAccount
         name: flux
         namespace: << inputs.name >>
-    <<- if inputs.features.slack_notifications.enabled >
+    <<- if inputs.features.slack_notifications.enabled >>
     ---
     apiVersion: notification.toolkit.fluxcd.io/v1beta3
     kind: Provider
@@ -144,7 +144,7 @@ spec:
           name: '*'
         - kind: HelmRelease
           name: '*'
-    <<- end>
+    <<- end >>
 ```
 
 ## Operational Runbooks
