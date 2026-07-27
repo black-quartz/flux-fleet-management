@@ -173,7 +173,7 @@ export GITHUB_APP_PEM="<GitHub App Private Key>"
 cd terraform
 terraform init
 terraform apply \
-  -var cluster_domain="staging-1.ilysium.io" \
+  -var cluster_domain="staging-1.cluster.ilysium.io" \
   -var git_url="https://github.com/ilysiumdotdev/flux-fleet-management" \
   -var git_path="./clusters/staging-1" \
   -var github_app_id="${GITHUB_APP_ID}" \

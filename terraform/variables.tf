@@ -60,9 +60,3 @@ variable "github_app_pem" {
     nullable    = false
     sensitive   = true
 }
-
-variable "slack_webhook_url" {
-    description = "Slack Webhook URL to use for platform deployment notifications."
-    type        = string
-    default     = ""
-}
