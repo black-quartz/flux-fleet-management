@@ -75,6 +75,7 @@ spec:
           defaultSettings:
             defaultReplicateCount: 1
             defaultDataLocality: best-effort
+            createDefaultDiskOnLabeledNodes: true
           persistence:
             defaultClass: true
             defaultClassReplicaCount: 1
