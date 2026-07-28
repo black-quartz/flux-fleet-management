@@ -16,6 +16,25 @@ spec:
         labels:
           pod-security.kubernetes.io/enforce: "privileged"
 
+    - apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: flux
+        namespace: longhorn-system
+
+    - apiVersion: rbac.authorization.k8s.io
+      kind: ClusterRoleBinding
+      metadata:
+        name: flux-infra-longhorn
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: flux
+          namespace: longhorn-system
+
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
