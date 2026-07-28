@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   dependsOn:
-    - name: state
+    - name: policies
   serviceAccountName: flux-operator
   path: ./tenants
   interval: 5m
