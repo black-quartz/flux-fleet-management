@@ -50,7 +50,8 @@ spec:
         name: longhorn
         namespace: longhorn-system
       spec:
-        serviceAccountName: flux-operator
+        serviceAccountName: flux
+        targetNamespace: longhorn-system
         interval: 30m
         chart:
           spec:
