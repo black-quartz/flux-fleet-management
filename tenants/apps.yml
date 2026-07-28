@@ -206,7 +206,7 @@ spec:
           min:
             cpu: "10m"
             memory: "32Mi"
-        <<- else if eq inputs.quota.compute "silver"
+        <<- else if eq inputs.quota.compute "silver" >>
         - type: Container
           default:
             cpu: "500m"
