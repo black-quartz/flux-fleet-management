@@ -15,7 +15,7 @@ spec:
         name: longhorn-system
         labels:
           pod-security.kubernetes.io/enforce: "privileged"
-    
+
     - apiVersion: source.toolkit.fluxcd.io/v1
       kind: HelmRepository
       metadata:
@@ -24,7 +24,7 @@ spec:
       spec:
         interval: 10m
         url: https://charts.longhorn.io
-    
+
     - apiVersion: helm.toolkit.fluxcd.io/v2
       kind: HelmRelease
       metadata:
@@ -41,15 +41,15 @@ spec:
           strategy:
             name: RetryOnFailure
             retryInterval: 3m
-          upgrade:
-            force: true
-            strategy:
-              name: RetryOnFailure
-              retryInterval: 3m
-          values:
-            defaultSettings:
-              defaultReplicateCount: 1
-              defaultDataLocality: best-effort
+        upgrade:
+          force: true
+          strategy:
+            name: RetryOnFailure
+            retryInterval: 3m
+        values:
+          defaultSettings:
+            defaultReplicateCount: 1
+            defaultDataLocality: best-effort
           persistence:
             defaultClass: true
             defaultClassReplicaCount: 1
