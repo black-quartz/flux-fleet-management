@@ -7,10 +7,10 @@ metadata:
     fluxcd.controlplane.io/role: "policy"
 data:
   sources: >-
-    https://github.com/black-quartz/actions-runner-scale-set-deployment
-    https://github.com/black-quartz/elastic-stack-deployment
-    https://github.com/black-quartz/vault-deployment
-    https://github.com/black-quartz/vector-deployment
+    https://github.com/ilysiumdotdev/actions-runner-scale-set-deployment
+    https://github.com/ilysiumdotdev/elastic-stack-deployment
+    https://github.com/ilysiumdotdev/vault-deployment
+    https://github.com/ilysiumdotdev/vector-deployment
     https://github.com/controlplaneio-fluxcd/
     https://helm.releases.hashicorp.com/
     https://helm.vector.dev
