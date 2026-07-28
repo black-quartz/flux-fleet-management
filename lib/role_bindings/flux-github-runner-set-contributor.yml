@@ -1,13 +1,13 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: flux-github-runner-set-contributor-binding
-  namespace: arc-runners
-subjects:
-  - kind: ServiceAccount
-    name: flux
-    namespace: arc-runners
-roleRef:
-  kind: Role
-  name: github-runner-set-contributor
-  apiGroup: rbac.authorization.k8s.io
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: RoleBinding
+# metadata:
+#   name: flux-github-runner-set-contributor-binding
+#   namespace: arc-runners
+# subjects:
+#   - kind: ServiceAccount
+#     name: flux
+#     namespace: arc-runners
+# roleRef:
+#   kind: Role
+#   name: github-runner-set-contributor
+#   apiGroup: rbac.authorization.k8s.io
