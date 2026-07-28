@@ -31,12 +31,17 @@ spec:
         name: longhorn
         namespace: longhorn-system
       spec:
-        interval: 30m
-        releaseName: longhorn
         serviceAccountName: flux-operator
-        chartRef:
-          kind: HelmRepository
-          name: longhorn
+        interval: 30m
+        chart:
+          spec:
+            chart: longhorn
+            version: "1.12.x"
+            sourceRef:
+              kind: HelmRepository
+              name: longhorn
+            interval: 12h
+        releaseName: longhorn
         install:
           strategy:
             name: RetryOnFailure
