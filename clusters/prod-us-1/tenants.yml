@@ -12,7 +12,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: flux-fleet-management
+    name: flux-system
   postBuild:
     substituteFrom:
       - kind: ConfigMap
