@@ -62,7 +62,7 @@ spec:
     apiVersion: v1
     kind: ConfigMap
     metadata:
-      name: flux-runtime=info
+      name: flux-runtime-info
       namespace: << inputs.name >>
       annotations:
         fluxcd.controlplane.io/copyFrom: "flux-system/flux-runtime-info"
