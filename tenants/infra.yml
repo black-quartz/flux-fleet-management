@@ -31,7 +31,7 @@ spec:
       environment: "${ENVIRONMENT}"
 
     - name: "envoy-gateway"
-      namespace: "gateway-system"
+      namespace: "envoy-gateway-system"
       environment: "${ENVIRONMENT}"
 
     - name: "external-secrets"
