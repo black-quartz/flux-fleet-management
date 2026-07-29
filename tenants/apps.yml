@@ -74,8 +74,8 @@ spec:
     metadata:
       name: github-auth
       namespace: << inputs.name >>
-    annotations:
-      fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
+      annotations:
+        fluxcd.controlplane.io/copyFrom: "flux-system/github-auth"
     type: Opaque
     ---
     apiVersion: v1
