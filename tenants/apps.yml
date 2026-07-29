@@ -137,7 +137,7 @@ spec:
     apiVersion: notification.toolkit.fluxcd.io/v1beta3
     kind: Provider
     metadata:
-      name: github-alert-provider
+      name: github-provider
       namespace: << inputs.name >>
     spec:
       type: github
