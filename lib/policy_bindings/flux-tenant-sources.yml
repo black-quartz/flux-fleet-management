@@ -15,6 +15,7 @@ data:
     https://github.com/controlplaneio-fluxcd/
     https://helm.releases.hashicorp.com/
     https://helm.vector.dev
+    https://twingate.github.io/helm-charts/
     oci://ghcr.io/actions/actions-runner-controller-charts
     oci://ghcr.io/controlplaneio-fluxcd/
 ---
