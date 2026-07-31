@@ -31,6 +31,15 @@ spec:
         url: "https://github.com/ilysiumdotdev/elastic-stack-deployment"
         path: "./kubernetes/${ENVIRONMENT}"
       features:
+    
+    - name: "twingate"
+      quota:
+        compute: "bronze"
+        storage: "bronze"
+      repository:
+        url: "https://github.com/ilysiumdotdev/twingate-connector-deployment"
+        path: "./kubernetes/${ENVIRONMENT}"
+      features:
 
     - name: "vault"
       quota:

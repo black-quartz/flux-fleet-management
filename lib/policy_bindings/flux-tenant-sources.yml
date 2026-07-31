@@ -9,6 +9,7 @@ data:
   sources: >-
     https://github.com/ilysiumdotdev/actions-runner-scale-set-deployment
     https://github.com/ilysiumdotdev/elastic-stack-deployment
+    https://github.com/ilysiumdotdev/twingate-connector-deployment
     https://github.com/ilysiumdotdev/vault-deployment
     https://github.com/ilysiumdotdev/vector-deployment
     https://github.com/controlplaneio-fluxcd/
