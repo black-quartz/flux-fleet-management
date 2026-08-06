@@ -31,7 +31,7 @@ spec:
         url: "https://github.com/ilysiumdotdev/elastic-stack-deployment"
         path: "./kubernetes/${ENVIRONMENT}"
       features:
-    
+
     - name: "minecraft"
       quota:
         compute: "gold"
@@ -40,7 +40,7 @@ spec:
         url: "https://github.com/ilysiumdotdev/minecraft-server-infrastructure"
         path: "./kubernetes/${ENVIRONMENT}"
       features:
-    
+
     - name: "twingate"
       quota:
         compute: "bronze"
@@ -186,7 +186,7 @@ spec:
         <<- if eq inputs.quota.compute "gold" >>
         requests.cpu: "2"
         requests.memory: "8Gi"
-        limits.cpu: "4"
+        limits.cpu: "2"
         limits.memory: "16Gi"
         pods: "16"
         <<- else if eq inputs.quota.compute "silver" >>
