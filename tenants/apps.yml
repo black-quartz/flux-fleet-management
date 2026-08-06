@@ -186,7 +186,7 @@ spec:
         <<- if eq inputs.quota.compute "gold" >>
         requests.cpu: "2"
         requests.memory: "8Gi"
-        limits.cpu: "6"
+        limits.cpu: "8"
         limits.memory: "16Gi"
         pods: "16"
         <<- else if eq inputs.quota.compute "silver" >>
