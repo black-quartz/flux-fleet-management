@@ -12,7 +12,7 @@ data:
     https://github.com/ilysiumdotdev/minecraft-server-infrastructure
     https://github.com/ilysiumdotdev/twingate-connector-deployment
     https://github.com/ilysiumdotdev/vault-deployment
-    https://github.com/ilysiumdotdev/vector-deployment
+    https://github.com/ilysiumdotdev/vector-telemetry-pipelines
     https://github.com/controlplaneio-fluxcd/
     https://helm.releases.hashicorp.com/
     https://helm.vector.dev

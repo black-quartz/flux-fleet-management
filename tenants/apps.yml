@@ -69,7 +69,7 @@ spec:
         compute: "gold"
         storage: "bronze"
       repository:
-        url: "https://github.com/ilysiumdotdev/vector-deployment"
+        url: "https://github.com/ilysiumdotdev/vector-telemetry-pipelines"
         path: "./kubernetes/${ENVIRONMENT}"
       security_profile: privileged
       features:
